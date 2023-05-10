@@ -13,7 +13,8 @@ class FinizensTest extends KernelTestCase
     /** @var EntityManagerInterface */
     private EntityManagerInterface $entityManager;
 
-    protected function setUp(): void {
+    protected function setUp(): void
+    {
         $kernel = self::bootKernel();
 
         DatabasePrimer::prime($kernel);
@@ -22,7 +23,8 @@ class FinizensTest extends KernelTestCase
     }
 
     /** @test */
-    public function a_portfolio_record_can_be_created_in_the_database() {
+    public function a_portfolio_record_can_be_created_in_the_database()
+    {
         // Portfolio
         $portfolio = new Portfolio();
 
@@ -50,7 +52,8 @@ class FinizensTest extends KernelTestCase
     }
 
     /** @test */
-    public function create_buy_type_order() {
+    public function create_buy_type_order()
+    {
         $order = new Order();
         $order->setPortfolio(1);
         $order->setAllocation(1);
@@ -71,7 +74,8 @@ class FinizensTest extends KernelTestCase
     }
 
     /** @test */
-    public function create_sell_type_order() {
+    public function create_sell_type_order()
+    {
         $order = new Order();
         $order->setPortfolio(1);
         $order->setAllocation(2);

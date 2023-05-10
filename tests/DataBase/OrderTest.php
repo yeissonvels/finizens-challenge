@@ -11,7 +11,8 @@ class OrderTest extends KernelTestCase
     /** @var EntityManagerInterface */
     private EntityManagerInterface $entityManager;
 
-    protected function setUp(): void {
+    protected function setUp(): void
+    {
         $kernel = self::bootKernel();
 
         DatabasePrimer::prime($kernel);
@@ -20,7 +21,8 @@ class OrderTest extends KernelTestCase
     }
 
     /** @test */
-    public function create_buy_type_order() {
+    public function create_buy_type_order()
+    {
         $order = new Order();
         $order->setPortfolio(1);
         $order->setAllocation(1);
@@ -41,7 +43,8 @@ class OrderTest extends KernelTestCase
     }
 
     /** @test */
-    public function create_sell_type_order() {
+    public function create_sell_type_order()
+    {
         $order = new Order();
         $order->setPortfolio(1);
         $order->setAllocation(2);

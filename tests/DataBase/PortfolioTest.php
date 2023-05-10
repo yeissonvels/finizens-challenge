@@ -12,7 +12,8 @@ class PortfolioTest extends KernelTestCase
     /** @var EntityManagerInterface */
     private EntityManagerInterface $entityManager;
 
-    protected function setUp(): void {
+    protected function setUp(): void
+    {
         $kernel = self::bootKernel();
 
         DatabasePrimer::prime($kernel);
@@ -21,7 +22,8 @@ class PortfolioTest extends KernelTestCase
     }
 
     /** @test */
-    public function a_portfolio_record_can_be_created_in_the_database() {
+    public function a_portfolio_record_can_be_created_in_the_database()
+    {
         // Portfolio
         $portfolio = new Portfolio();
 

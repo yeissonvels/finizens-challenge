@@ -7,7 +7,8 @@ use Symfony\Bundle\FrameworkBundle\Test\WebTestCase;
 class PortfolioControllerTest extends WebTestCase
 {
     /** @test  */
-    public function get_portfolio_info_from_api() {
+    public function get_portfolio_info_from_api()
+    {
         $client = static::createClient();
 
         // Request a specific endpoint
@@ -22,7 +23,8 @@ class PortfolioControllerTest extends WebTestCase
     }
 
     /** @test  */
-    public function portfolio_info_template() {
+    public function portfolio_info_template()
+    {
         $client = static::createClient();
 
         // Request a specific endpoint
@@ -36,7 +38,9 @@ class PortfolioControllerTest extends WebTestCase
         $this->assertResponseIsSuccessful();
         $this->assertSelectorTextContains('h5', 'Portfolio 1');
         $this->assertSelectorTextContains('b', 'Allocations');
-        $this->assertGreaterThan(0,
-            $crawler->filter('html b:contains("Orders")')->count());
+        $this->assertGreaterThan(
+            0,
+            $crawler->filter('html b:contains("Orders")')->count()
+        );
     }
 }
