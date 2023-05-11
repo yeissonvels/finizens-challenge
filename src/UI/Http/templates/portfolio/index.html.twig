@@ -1,0 +1,119 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Portfolio{% endblock %}
+
+{% block body %}
+
+<div class="container-fluid">
+    {% if portfolio is not null and portfolio is not empty %}
+        {% if app.request.get('order-type') is defined and app.request.get('order-type') is not empty %}
+            {% set orderType = 'Sales' %}
+            {% if app.request.get('order-type') == 'buy' %}
+                {% set orderType = 'Buy' %}
+            {% endif %}
+            <div class="alert alert-success mt-2" role="alert">
+                {{ orderType }} order created successfully!
+            </div>
+        {% endif %}
+        <div class="card mt-2">
+            <h5 class="card-header">Create sales order </h5>
+            <div class="card-body">
+                <form class="form-inline" action="{{ path('app_create_sales_order') }}" method="post">
+                    <div class="form-group">
+                        <label class="col-lg-3 col-form-label">Allocation</label>
+                        <div class="col-lg-6">
+                            <select name="allocation" class="form-control" required>
+                                <option value="">Select an allocation</option>
+                                {% for allocation in portfolio.allocations %}
+                                    <option value="{{ allocation.id }}">Id: {{ allocation.id }} | Shares: {{ allocation.shares }}</option>
+                                {% endfor %}
+                            </select>
+                        </div>
+                    </div>
+
+                    <input type="hidden" value="{{ portfolio.id }}" name="portfolio">
+                    <input type="hidden" value="sell" name="type">
+                    <button class="btn btn-primary">Create sales order</button>
+
+                </form>
+            </div>
+        </div>
+        <div class="card mt-2">
+            <h5 class="card-header">Create buy order</h5>
+            <div class="card-body">
+                <form class="form-inline" action="{{ path('app_create_buy_order') }}" method="post">
+                    <div class="form-group">
+                        <label class="col-lg-2 col-form-label">Shares number</label>
+                        <div class="col-lg-6">
+                            <select name="allocation" class="form-control" required>
+                                <option value="">Select the shares number</option>
+                                {% for i in 1..100 %}
+                                    <option value="{{ i }}">{{ i }}</option>
+                                {% endfor %}
+                            </select>
+                        </div>
+                        <input type="hidden" value="{{ portfolio.id }}">
+
+                        <button class="btn btn-primary">Create buy order</button>
+                    </div>
+                </form>
+            </div>
+        </div>
+        <div class="card mt-2">
+            <h5 class="card-header">Portfolio {{ portfolio.id }}</h5>
+            <div class="card-body">
+                <b>Allocations</b>
+                <table class="table">
+                    <thead>
+                    <tr>
+                        <th>Id</th>
+                        <th>Shares</th>
+                    </tr>
+                    </thead>
+                    <tbody>
+                    {% for allocation in portfolio.allocations %}
+                        <tr>
+                            <td>{{ allocation.id }}</td>
+                            <td>{{ allocation.shares }}</td>
+                        </tr>
+                    {% endfor %}
+                    </tbody>
+                </table>
+                {% if orders is not empty %}
+                <b>Orders</b>
+                <table class="table">
+                    <thead>
+                    <tr>
+                        <th>Id</th>
+                        <th>Allocation</th>
+                        <th>Shares</th>
+                        <th>Type</th>
+                        <th>Completed</th>
+                    </tr>
+                    </thead>
+                    <tbody>
+                    {% for order in orders %}
+                        <tr>
+                            <td>{{ order.id }}</td>
+                            <td>{{ order.allocation }}</td>
+                            <td>{{ order.shares }}</td>
+                            <td>{{ order.type }}</td>
+                            <td>{{ order.completed == 0 ? 'false' : 'true' }}</td>
+                        </tr>
+                    {% endfor %}
+                    </tbody>
+                </table>
+                {% else %}
+                    <div class="alert alert-warning mt-2" role="alert">
+                       There are no orders!
+                    </div>
+                {% endif %}
+            </div>
+        </div>
+    {% else %}
+        <div class="alert alert-danger mt-2" role="alert">
+            Portfolio not found!
+        </div>
+    {% endif %}
+</div>
+{% endblock %}
