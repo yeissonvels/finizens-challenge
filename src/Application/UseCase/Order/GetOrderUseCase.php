@@ -14,8 +14,8 @@ class GetOrderUseCase
             return $orderRepository->findAll();
         } catch (\Exception $exception) {
             //TODO: log the exceptions
-            return [];
         }
-
+        
+        return [];
     }
 }
