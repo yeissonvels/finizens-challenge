@@ -13,7 +13,9 @@ class GetPortfolioUseCase
         try {
             return $portfolioRespository->findOneBy(['id' => $id]);
         } catch (\Exception $error) {
-            return $error;
+            //TODO: log the exception
         }
+        
+        return null;
     }
 }
