@@ -15,7 +15,7 @@ class GetOrderUseCase
         } catch (\Exception $exception) {
             //TODO: log the exceptions
         }
-        
+
         return [];
     }
 }

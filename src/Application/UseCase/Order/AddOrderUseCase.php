@@ -27,7 +27,7 @@ class AddOrderUseCase
         } catch (\Exception $exception) {
             //TODO: log the exceptions
         }
-        
+
         return false;
     }
 }

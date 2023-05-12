@@ -28,7 +28,6 @@ class PutPortfolioUseCase
             $portfolio->addAllocation($newAllocation);
         }
 
-        // $portfolio->removeAllocations();
         $entityManager->persist($portfolio);
         $entityManager->flush();
     }

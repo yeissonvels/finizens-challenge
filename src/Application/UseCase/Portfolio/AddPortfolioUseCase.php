@@ -8,7 +8,7 @@ use Doctrine\ORM\EntityManagerInterface;
 
 class AddPortfolioUseCase
 {
-    public function execute(EntityManagerInterface $entityManager): Portfolio
+    public function execute(EntityManagerInterface $entityManager): ?Portfolio
     {
         $portfolio = new Portfolio();
         // Insert the allocations
@@ -23,9 +23,14 @@ class AddPortfolioUseCase
         $portfolio->addAllocation($allocation1);
         $portfolio->addAllocation($allocation2);
 
-        $entityManager->persist($portfolio);
-        $entityManager->flush();
+        try {
+            $entityManager->persist($portfolio);
+            $entityManager->flush();
+            return $portfolio;
+        } catch (\Exception $exception) {
+            //TODO: log the exception
+        }
 
-        return $portfolio;
+        return null;
     }
 }

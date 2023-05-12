@@ -15,7 +15,7 @@ class GetPortfolioOrdersUseCase
         } catch (\Exception $exception) {
             //TODO: log the exception
         }
-        
+
         return [];
     }
 }

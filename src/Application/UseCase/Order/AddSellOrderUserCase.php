@@ -27,7 +27,7 @@ class AddSellOrderUserCase
         } catch (\Exception $exception) {
             //TODO: log the exceptions
         }
-        
+
         return false;
     }
 }

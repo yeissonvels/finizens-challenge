@@ -15,7 +15,7 @@ class GetPortfolioUseCase
         } catch (\Exception $error) {
             //TODO: log the exception
         }
-        
+
         return null;
     }
 }
