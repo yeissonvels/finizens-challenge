@@ -14,8 +14,8 @@ class GetPortfolioOrdersUseCase
             return $orderRepository->findBy(['portfolio' => $portfolioId]);
         } catch (\Exception $exception) {
             //TODO: log the exception
-            return [];
         }
-
+        
+        return [];
     }
 }
