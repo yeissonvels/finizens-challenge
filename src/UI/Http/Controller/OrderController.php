@@ -2,6 +2,7 @@
 
 namespace App\UI\Http\Controller;
 
+use App\Application\UseCase\Order\AddBuyOrderUserCase;
 use App\Application\UseCase\Order\AddOrderUseCase;
 use App\Application\UseCase\Order\AddSellOrderUserCase;
 use App\Application\UseCase\Order\GetOrderUseCase;
@@ -30,10 +31,11 @@ class OrderController extends AbstractController
     }
 
     #[Route('/orders/create-buy-order', name: 'app_create_buy_order', methods: ['post'])]
-    public function saveBuyOrder(Request $request): Response
+    public function saveBuyOrder(AddBuyOrderUserCase $addBuyOrderUserCase, EntityManagerInterface $entityManager, Request $request): Response
     {
-        dd($request->request->all());
-        return new Response('Ok');
+        $data = $request->request->all();
+        $addBuyOrderUserCase->execute($entityManager, $data);
+        return $this->redirect($this->generateUrl('app_portfolio_search', array('id' => $data['portfolio'], 'order-type' => 'buy')));
     }
 
     #[Route('/api/orders', name: 'app_add_order', methods: ['post'])]

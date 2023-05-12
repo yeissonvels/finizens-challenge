@@ -4,16 +4,23 @@ namespace App\Application\UseCase\Order;
 
 use App\Domain\Model\Entity\Allocation;
 use App\Domain\Model\Entity\Order;
+use App\Domain\Model\Entity\Portfolio;
 use Doctrine\ORM\EntityManagerInterface;
 
-class AddSellOrderUserCase
+class AddBuyOrderUserCase
 {
     public function execute(EntityManagerInterface $entityManager, $orderData): bool
     {
-        $allocationRepository = $entityManager->getRepository(Allocation::class);
+        $portfolioRepository = $entityManager->getRepository(Portfolio::class);
+
         try {
-            /** @var Allocation $allocation */
-            $allocation = $allocationRepository->findOneBy(['id' => $orderData['allocation']]);
+            $portfolio = $portfolioRepository->findOneBy(['id' => $orderData['portfolio']]);
+            $allocation = new Allocation();
+            $allocation->setShares($orderData['shares']);
+            $allocation->setPortfolio($portfolio);
+            $entityManager->persist($allocation);
+            $entityManager->flush();
+
             $order = new Order();
             $order->setPortfolio($allocation->getPortfolio()->getId());
             $order->setAllocation($allocation->getId());

@@ -5,7 +5,12 @@
 {% block body %}
 
 <div class="container-fluid">
-    <div class="alert alert-success mt-2" role="alert">Portfolio created!</div>
+    <div class="alert alert-success mt-2" role="alert">
+        Portfolio created!
+    </div>
+    <p>
+        <a href="{{ path('app_portfolio_search', {id: portfolio.id}) }}">>>Show Portfolio info</a>
+    </p>
     <div class="card mt-2">
         <h5 class="card-header">Portfolio {{ portfolio.id }}</h5>
         <div class="card-body">

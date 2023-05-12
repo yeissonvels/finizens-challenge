@@ -25,6 +25,7 @@ class AddOrderUseCase
             $entityManager->flush();
             return true;
         } catch (\Exception $exception) {
+            //TODO: log the exceptions
             return false;
         }
     }

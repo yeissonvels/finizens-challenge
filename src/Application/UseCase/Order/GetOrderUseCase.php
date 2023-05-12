@@ -10,6 +10,12 @@ class GetOrderUseCase
     public function execute(EntityManagerInterface $entityManager): array
     {
         $orderRepository = $entityManager->getRepository(Order::class);
-        return $orderRepository->findAll();
+        try {
+            return $orderRepository->findAll();
+        } catch (\Exception $exception) {
+            //TODO: log the exceptions
+            return [];
+        }
+
     }
 }

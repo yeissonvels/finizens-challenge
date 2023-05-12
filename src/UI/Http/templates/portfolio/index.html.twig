@@ -45,14 +45,15 @@
                     <div class="form-group">
                         <label class="col-lg-2 col-form-label">Shares number</label>
                         <div class="col-lg-6">
-                            <select name="allocation" class="form-control" required>
+                            <select name="shares" class="form-control" required>
                                 <option value="">Select the shares number</option>
                                 {% for i in 1..100 %}
                                     <option value="{{ i }}">{{ i }}</option>
                                 {% endfor %}
                             </select>
                         </div>
-                        <input type="hidden" value="{{ portfolio.id }}">
+                        <input type="hidden" value="{{ portfolio.id }}" name="portfolio">
+                        <input type="hidden" value="buy" name="type">
 
                         <button class="btn btn-primary">Create buy order</button>
                     </div>

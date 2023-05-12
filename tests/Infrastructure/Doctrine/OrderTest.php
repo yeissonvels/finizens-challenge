@@ -15,9 +15,9 @@ class OrderTest extends KernelTestCase
     {
         $kernel = self::bootKernel();
 
-        DatabasePrimer::prime($kernel);
+                    DatabasePrimer::prime($kernel);
 
-        $this->entityManager = $kernel->getContainer()->get('doctrine')->getManager();
+                    $this->entityManager = $kernel->getContainer()->get('doctrine')->getManager();
     }
 
     /** @test */
